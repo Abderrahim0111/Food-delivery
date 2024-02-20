@@ -7,7 +7,7 @@ import SearchLocation from "./searchLocation";
 const AddLocation = ({ cities }) => {
   return (
     <div className=" bg-[#00000099] fixed inset-0 flex items-center justify-center z-10">
-      <div className=" bg-white rounded-lg p-3 sm:min-w-[500px] max-w-[600px] flex flex-col h-[400px] overflow-y-scroll scrollbar mx-2">
+      <div className=" bg-white rounded-lg p-3 w-[370px] sm:w-[500px] flex flex-col h-[400px] overflow-y-scroll scrollbar mx-2">
         <Link
           scroll={false}
           href="/"

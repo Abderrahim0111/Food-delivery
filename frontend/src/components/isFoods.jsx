@@ -10,11 +10,16 @@ const IsFoods = () => {
   const [foods, setfoods] = useState([]);
   const [loadingF, setloadingF] = useState(true);
   const [loadingD, setloadingD] = useState(false);
+  const [searchTerm, setsearchTerm] = useState("");
+
+  const handleChange = (e) => {
+    setsearchTerm(e.target.value)
+  }
 
   useEffect(() => {
     const fetchPartnerFoods = async () => {
       try {
-        const res = await fetch("/api/fetchPartnerFoods", {
+        const res = await fetch(`/api/fetchPartnerFoods?search=${searchTerm}`, {
           cache: "no-store",
         });
         const data = await res.json();
@@ -50,7 +55,8 @@ const IsFoods = () => {
   if (loadingF) return <LoadingF />;
   return (
     <div className=" mt-16 max-w-2xl mx-auto">
-      {foods.map((food, index) => {
+      <input onChange={handleChange} value={searchTerm} type="text" name="search" className=" p-2 rounded-xl outline-none border w-full mb-6 bg-[#FFF1DA]" placeholder="Search for a food..." />
+      {foods.length > 0 ? foods.map((food, index) => {
         return (
           <div
             key={index}
@@ -100,7 +106,7 @@ const IsFoods = () => {
             </div>
           </div>
         );
-      })}
+      }): <p className=" text-center">No foods yet!</p>}
     </div>
   );
 };

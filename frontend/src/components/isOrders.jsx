@@ -1,7 +1,8 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import LoadingF from "./loadingF";
-
+import moment from "moment";
+ 
 const IsOrders = () => {
   const [orders, setorders] = useState([]);
   const [loading, setloading] = useState(false);
@@ -44,14 +45,15 @@ const IsOrders = () => {
 
   if (loadingF) return <LoadingF />;
   return (
-    <div className=" mx-auto mt-20 max-w-xl flex flex-col items-center">
+    <div className="mt-16 max-w-max mx-auto px-2">
       {orders.length > 0 ? (
         <>
           <h1 className=" text-3xl mb-10 font-bold text-center">Orders</h1>
-          <div className=" w-screen lg:w-fit px-2 overflow-x-scroll">
+          <div className=" overflow-x-scroll scrollbar">
           <table className="border-collapse border shadow-md  ">
             <thead>
               <tr className="bg-[#E9F7F5]">
+                <th className="border  px-4 py-2">Time</th>
                 <th className="border  px-4 py-2">Food</th>
                 <th className="border  px-4 py-2">Quantity</th>
                 <th className="border  px-4 py-2">Price</th>
@@ -68,6 +70,7 @@ const IsOrders = () => {
                   key={orderIndex}
                   
                 >
+                  <td className="border text-center  px-4 py-2">{moment(order.createdAt).fromNow(true)}</td>
                   <td className="border  px-4 py-2">
                     {order.foods.map((food, foodIndex) => (
                       <div key={foodIndex} className="flex items-center gap-2">

@@ -342,13 +342,13 @@ const IsAddFood = () => {
             type="text"
             name="storeName"
             placeholder="Store name"
-            className=" p-2 rounded-lg outline-none"
+            className=" p-2 rounded-lg outline-none border"
           />
           <select
             required
             onChange={changeStoreInfo}
             name="storeCity"
-            className=" p-2 rounded-lg outline-none"
+            className=" p-2 rounded-lg outline-none border"
           >
             <option value="" hidden>
               Store city
@@ -393,7 +393,7 @@ const IsAddFood = () => {
             required
             onChange={handleChange}
             value={foodData.title}
-            className=" p-2 rounded-lg outline-none"
+            className=" p-2 rounded-lg outline-none border"
             type="text"
             name="title"
             placeholder="Food title"
@@ -402,7 +402,7 @@ const IsAddFood = () => {
             required
             onChange={handleChange}
             value={foodData.description}
-            className=" p-2 rounded-lg outline-none"
+            className=" p-2 rounded-lg outline-none border"
             name="description"
             placeholder="Food description"
           />
@@ -413,7 +413,7 @@ const IsAddFood = () => {
             name="category"
             required
             placeholder="Category"
-            className="rounded-lg p-2 outline-none"
+            className="rounded-lg p-2 outline-none border"
           />
 
           <div className=" flex items-center gap-2">
@@ -421,7 +421,7 @@ const IsAddFood = () => {
               required
               onChange={handleChange}
               value={foodData.price}
-              className=" p-2 rounded-lg outline-none"
+              className=" p-2 rounded-lg outline-none border"
               type="number"
               name="price"
               placeholder="Price"
@@ -456,13 +456,13 @@ const IsAddFood = () => {
             maxLength={6}
             type="file"
             name="images"
-            className=" w-full p-2 rounded-lg border border-[#00A081] mb-3"
+            className=" w-full p-2 rounded-lg border  mb-3"
           />
           {imagesUrl.map((imageUrl, index) => {
             return (
               <div
                 key={index}
-                className=" border border-[#00A081] mb-2 rounded-lg p-2 flex items-center justify-between"
+                className=" border mb-2 rounded-lg p-2 flex items-center justify-between"
               >
                 <div className="h-14 w-14 ">
                   <Image src={imageUrl} alt="image" height={200} width={200} />

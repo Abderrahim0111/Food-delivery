@@ -104,7 +104,7 @@ const Page = () => {
       </div>
       <div className=" flex-col md:flex-row-reverse flex gap-8 mt-10">
         <div className=" flex-1 lg:flex-[0.6]">
-          <div className=" rounded-xl shadow-lg p-5 border h-fit sticky top-20">
+          <div className=" rounded-xl shadow-lg py-5 px-2 md:px-5 border h-fit sticky top-20">
             <h1 className=" text-2xl font-semibold text-center mb-6">
               Your order
             </h1>
@@ -119,7 +119,7 @@ const Page = () => {
                   return (
                     <div
                       key={index}
-                      className=" flex items-center justify-between mb-3"
+                      className=" flex items-center justify-between mb-3 "
                     >
                       <div className="flex items-center gap-2 sm:gap-3">
                         <FontAwesomeIcon

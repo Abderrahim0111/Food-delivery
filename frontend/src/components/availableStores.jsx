@@ -5,9 +5,7 @@ import React from "react";
 const AvailableStores = async ({ props }) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_ENDPOINT}/api/fetchStoresByCity/${props.searchParams.city}`,
-    {
-      cache: "no-store",
-    }
+    { next: {revalidate: 300} }
   );
   const stores = await res.json();
   return (

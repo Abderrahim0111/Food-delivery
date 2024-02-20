@@ -8,13 +8,13 @@ import Link from "next/link";
 const ProductModel = async ({ foodid, props }) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_ENDPOINT}/api/fetchFood/${foodid}`,
-    { cache: "no-store" }
+    { next: {revalidate: 180} }
   );
   const food = await res.json();
 
   return (
     <div className=" bg-[#00000099] flex items-center justify-center fixed top-0 bottom-0 left-0 right-0 z-10">
-      <div className=" bg-white rounded-lg px-3 sm:min-w-[450px] max-w-[500px] h-[700px] overflow-y-scroll scrollbar mx-2 flex flex-col">
+      <div className=" bg-white rounded-lg px-3 w-[370px] sm:w-[500px] h-[640px] sm:h-[700px] overflow-y-scroll scrollbar mx-2 flex flex-col">
         <Link
           scroll={false}
           href={

@@ -5,7 +5,7 @@ import React from 'react';
 
 const TopRestaurnets = async () => {
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/api/fetchStores`, {cache: 'no-store'})
+    const res = await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/api/fetchStores`, { next: {revalidate: 300} })
     const stores = await res.json()
 
     return (

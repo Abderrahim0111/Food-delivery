@@ -4,7 +4,7 @@ import FoodItem from "./foodItem";
 const SearchSection = async ({ props, searchTerm }) => {
   const res4 = await fetch(
     `${process.env.NEXT_PUBLIC_ENDPOINT}/api/fetchSearchFoods/${props.params.storeName}?search=${searchTerm}`,
-    { cache: "no-store" }
+    { next: {revalidate: 300} }
   );
   const searchResult = await res4.json();
 

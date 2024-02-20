@@ -59,7 +59,7 @@ const Page = () => {
 
     return (
         <div className='h-[calc(100vh-64px)] bg-[#FFC144] px-2'>
-            <h1 className=' font-bold text-5xl text-center py-10'>Welcome</h1>
+            <h1 className=' font-bold text-3xl sm:text-5xl text-center py-10'>Welcome</h1>
             <form onSubmit={handleSubmit} className=' flex flex-col gap-3 max-w-lg mx-auto'>
                 <input onChange={handleChnage} type="text" name="username" placeholder='Username' className=' p-2 rounded-lg w-full outline-none'/>
                 <input onChange={handleChnage} type="text" name="phone" placeholder='Phone number' className=' p-2 rounded-lg w-full outline-none'/>

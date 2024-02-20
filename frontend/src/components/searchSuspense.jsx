@@ -5,7 +5,7 @@ import React from "react";
 const SearchSuspense = () => {
   return (
     <div className="my-6 flex gap-4 justify-center flex-wrap">
-      {[1, 1, 1, 1].map((item, index) => {
+      {[1, 1].map((item, index) => {
         return (
           <div key={index} className=" cursor-pointer min-w-[368px] flex-1 shadow-md rounded-lg p-4 border">
             <div className=" flex gap-4 mb-4">

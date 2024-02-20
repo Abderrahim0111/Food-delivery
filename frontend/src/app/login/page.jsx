@@ -59,7 +59,7 @@ const Page = () => {
 
   return (
     <div className="h-[calc(100vh-64px)] bg-[#FFC144] px-2">
-      <h1 className=" font-bold text-5xl text-center py-10">
+      <h1 className=" font-bold text-3xl sm:text-5xl text-center py-10">
         Login with your account
       </h1>
       <form

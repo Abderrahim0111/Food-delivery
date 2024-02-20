@@ -32,13 +32,19 @@ const fetchClientOrders = async (req, res) => {
         orders.map((order) => {
             const foods = []
             order.orders.map((food) => {
-                foods.push({
-                    image: food.foodId.images[0],
-                    title: food.foodId.title,
-                    quantity: food.quantity,
-                    price: food.price
-                })
-            })
+                // Check if foodId exists and is not null
+                if (food.foodId) {
+                    foods.push({
+                        image: food.foodId.images[0], // Ensure foodId exists before accessing images
+                        title: food.foodId.title,
+                        quantity: food.quantity,
+                        price: food.price
+                    });
+                }
+            });
+
+
+
             finalResponse.push({
                 id: order._id,
                 address: order.address,
@@ -80,7 +86,8 @@ const fetchPartnerOrders = async (req, res) => {
                 username: order.client.username,
                 phone: order.client.phone,
                 email: order.client.email,
-                foods: foods
+                foods: foods,
+                createdAt: order.createdAt
             });
         });
 

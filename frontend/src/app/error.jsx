@@ -1,8 +1,10 @@
-"use client"
-import { redirect } from 'next/navigation';
+"use client";
+import { redirect } from "next/navigation";
+import { useSelector } from "react-redux";
 
 const Error = () => {
-    redirect("/")
-}
+  const { userCity } = useSelector((state) => state.user);
+  userCity ? redirect(`/?city=${userCity}`) : redirect("/");
+};
 
 export default Error;

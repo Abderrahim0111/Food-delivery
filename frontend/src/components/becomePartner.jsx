@@ -8,20 +8,20 @@ const BecomePartner = ({ props }) => {
   const subject = "Interest in Becoming a Partner";
   return (
     <div className=" bg-[#00000099] fixed inset-0 flex items-center justify-center z-10">
-      <div className=" bg-white rounded-lg p-3 sm:min-w-[500px] max-w-[600px] flex flex-col max-h-[800px] overflow-y-scroll scrollbar mx-2">
+      <div className=" bg-white rounded-lg p-3 sm:min-w-[500px] max-w-[600px] flex flex-col h-fit overflow-y-scroll scrollbar mx-2">
         <Link
           scroll={false}
           href={
             props.searchParams.city ? `?city=${props.searchParams.city}` : "/"
           }
-          className=" text-right mb-5 text-white sticky top-0 z-10 py-2 "
+          className=" text-right text-white sticky top-0 z-10 py-2 "
         >
           <FontAwesomeIcon
             icon={faClose}
             className="bg-[#B2B2B2] rounded-full h-5 w-5 p-1 cursor-pointer"
           />
         </Link>
-        <h1 className=" text-3xl font-bold text-center mb-14">Work with us</h1>
+        <h1 className=" text-3xl font-bold text-center mb-3 sm:mb-14">Work with us</h1>
         <div className="">
           <p>
             To become a partner and showcase your store on our website, allowing
@@ -55,7 +55,7 @@ const BecomePartner = ({ props }) => {
             makes it easier for customers to discover and enjoy your offerings.
           </p>
         </div>
-        <Link href={`mailto:${myEmail}?subject=${encodeURIComponent(subject)}`} className=" rounded-3xl my-10 w-full text-center p-2 bg-[#00A081] text-white font-bold">Join now!</Link>
+        <Link href={`mailto:${myEmail}?subject=${encodeURIComponent(subject)}`} className=" rounded-3xl mt-4 sm:mt-10 w-full text-center p-2 bg-[#00A081] text-white font-bold">Join now!</Link>
       </div>
     </div>
   );

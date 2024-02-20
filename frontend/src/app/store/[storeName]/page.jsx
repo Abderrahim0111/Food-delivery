@@ -29,8 +29,8 @@ const Page = async (props) => {
           <div className="  h-16 w-16 p-2 border bg-white rounded-lg absolute top-[-15px] left-7 shadow-xl">
             <Image src={data.storeImage} alt="image" height={200} width={200} />
           </div>
-          <h1 className=" mt-14 text-3xl font-bold capitalize">
-            {props.params.storeName}
+          <h1 className="mt-14 text-3xl font-bold capitalize">
+            {decodeURIComponent(props.params.storeName)}
           </h1>
         </div>
         <div className=" flex gap-5">

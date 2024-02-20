@@ -26,7 +26,7 @@ const SearchLocation = ({ cities }) => {
           className="h-6 w-6 text-white"
         />
       </div>
-      <select onChange={handleChange} name="city" className="outline-none flex-1 mr-3">
+      <select onChange={handleChange} name="city" className="outline-none flex-1 mr-3 bg-transparent">
         <option value="" hidden>{userCity ? userCity : "Select your city"}</option>
         {cities.map((city, index) => (
           <option key={index} value={city}>{city}</option>

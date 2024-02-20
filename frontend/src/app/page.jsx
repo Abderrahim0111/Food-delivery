@@ -11,7 +11,7 @@ import { Suspense } from "react";
 export default async function Home(props) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_ENDPOINT}/api/fetchAvailableCities`,
-    { cache: "no-store" }
+    { next: {revalidate: 300} }
   );
   const cities = await res.json();
 

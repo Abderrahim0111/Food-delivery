@@ -60,8 +60,10 @@ const createFood = async (req, res) => {
 
 const fetchPartnerFoods = async (req, res) => {
     try {
+        const searchTerm = req.query.search || ""
         const decoded = jwt.verify(req.cookies.jwt, process.env.JWT)
         const foods = await Food.find({
+            title: { $regex: searchTerm, $options: "i" },
             partner: decoded.id
         }).sort({createdAt: -1})
         res.json(foods)

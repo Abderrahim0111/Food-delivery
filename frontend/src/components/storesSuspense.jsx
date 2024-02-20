@@ -3,7 +3,7 @@ import React from 'react';
 const StoresSuspense = () => {
     return (
         <div className=" my-16 px-2 max-w-4xl mx-auto">
-            <h1 className=" text-4xl text-center font-bold mb-8 bg-gray-300 animate-pulse p-3 px-9"></h1>
+            <h1 className=" text-4xl text-center font-bold mb-8 bg-gray-300 animate-pulse p-3"></h1>
             <div className=" flex flex-wrap justify-center gap-8 ">
             {[1,1,1,1].map((item, index) => {
                 return(

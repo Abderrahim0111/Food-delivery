@@ -16,6 +16,7 @@ const Page = () => {
           cache: "no-store",
         });
         const data = await res.json();
+        console.log(data)
         if (!data.error) {
           setorders(data);
           setloadingF(false)
@@ -48,11 +49,11 @@ const Page = () => {
 
   if(loadingF) return <LoadingF />
   return (
-    <div className=" mx-auto mt-20 max-w-xl flex flex-col items-center">
+    <div className=" mt-16 max-w-2xl mx-auto px-2">
       {orders.length > 0 ? (
         <>
           <h1 className=" text-3xl mb-10 font-bold text-center">Your orders</h1>
-          <div className=" px-2 overflow-x-scroll w-screen  sm:w-fit">
+          <div className=" overflow-x-scroll scrollbar">
           <table className="border-collapse border shadow-md  ">
             <thead>
               <tr className="bg-[#E9F7F5]">

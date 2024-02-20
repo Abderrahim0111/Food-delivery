@@ -1,5 +1,6 @@
 const User = require("../models/userSchema");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const cloudinary = require("cloudinary").v2;
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -26,6 +27,11 @@ const fetchUser = async (req, res) => {
 const updateProfile = async (req, res) => {
   try {
     const decoded = jwt.verify(req.cookies.jwt, process.env.JWT);
+    if (req.body.password) {
+      const salt = await bcrypt.genSalt();
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
+      req.body.password = hashedPassword;
+    }
     const user = await User.findByIdAndUpdate(decoded.id, req.body, {
       new: true,
     });
@@ -42,14 +48,21 @@ const updateProfile = async (req, res) => {
 
 const fetchPartners = async (req, res) => {
   try {
-    const partners = await User.find({ role: "partner" }).sort({
+    const searchTerm = req.query.search || "";
+    const partners = await User.find({
+      role: "partner",
+      $or: [
+        { username: { $regex: searchTerm, $options: "i" } },
+        { email: { $regex: searchTerm, $options: "i" } },
+      ],
+    }).sort({
       createdAt: -1,
     });
 
     const noPass = partners.map((partner) => {
       const { password, ...rest } = partner._doc;
       return rest;
-    });
+    }); 
 
     res.json(noPass);
   } catch (error) {
@@ -59,7 +72,13 @@ const fetchPartners = async (req, res) => {
 
 const fetchUsers = async (req, res) => {
   try {
-    const users = await User.find().sort({ createdAt: -1 });
+    const searchTerm = req.query.search || ""
+    const users = await User.find({
+      $or: [
+        {username: {$regex: searchTerm, $options: "i"}},
+        {email: {$regex: searchTerm, $options: "i"}}
+      ]
+    }).sort({ createdAt: -1 });
     const filtredUsers = users.filter((user) => {
       return user.role !== "admin";
     });
@@ -114,13 +133,13 @@ const fetchStores = async (req, res) => {
       role: "partner",
       modified: true,
     });
-    const storesRequiredInfo = []
+    const storesRequiredInfo = [];
     stores.map((store) => {
       storesRequiredInfo.push({
         storeImage: store.storeImage,
         storeName: store.storeName,
-      })
-    })
+      });
+    });
     res.json(storesRequiredInfo);
   } catch (error) {
     res.json({ error: error.message });
@@ -129,20 +148,21 @@ const fetchStores = async (req, res) => {
 
 const fetchStoresByCity = async (req, res) => {
   try {
-    if(!req.params.storeCity) return res.json({error: 'invalid informations'})
-    const stores = await User.find({storeCity: req.params.storeCity})
-    const storesRequiredInfo = []
+    if (!req.params.storeCity)
+      return res.json({ error: "invalid informations" });
+    const stores = await User.find({ storeCity: req.params.storeCity });
+    const storesRequiredInfo = [];
     stores.map((store) => {
       storesRequiredInfo.push({
         storeImage: store.storeImage,
         storeName: store.storeName,
-      })
-    })
+      });
+    });
     res.json(storesRequiredInfo);
   } catch (error) {
-    res.json({error: error.message})
+    res.json({ error: error.message });
   }
-}
+};
 
 const fetchUserCategories = async (req, res) => {
   try {
@@ -167,30 +187,30 @@ const uploadStoreImage = async (req, res) => {
 
 const fetchAvailableCities = async (req, res) => {
   try {
-    const stores = await User.find({modified: true})
-    const storeCities = []
+    const stores = await User.find({ modified: true });
+    const storeCities = [];
 
     stores.map((store) => {
-      storeCities.push(store.storeCity)
-    })
-    const uniqueCities = [...new Set(storeCities)]
-    res.json(uniqueCities)
+      storeCities.push(store.storeCity);
+    });
+    const uniqueCities = [...new Set(storeCities)];
+    res.json(uniqueCities);
   } catch (error) {
-    res.json({error: error.message})
+    res.json({ error: error.message });
   }
-}
+};
 
 const fetchStoreImage = async (req, res) => {
   try {
-    const store = await User.findOne({storeName: req.params.storeName})
+    const store = await User.findOne({ storeName: req.params.storeName });
 
     res.json({
-      storeImage: store.storeImage
-    })
+      storeImage: store.storeImage,
+    });
   } catch (error) {
-    res.json({error: error.message})
+    res.json({ error: error.message });
   }
-}
+};
 
 module.exports = {
   updateProfile,
@@ -204,5 +224,5 @@ module.exports = {
   uploadStoreImage,
   fetchAvailableCities,
   fetchStoresByCity,
-  fetchStoreImage
+  fetchStoreImage,
 };

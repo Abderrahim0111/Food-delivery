@@ -4,11 +4,16 @@ import LoadingF from "./loadingF";
 const IsAddPartner = () => {
   const [users, setusers] = useState([]);
   const [loadingF, setloadingF] = useState(true);
+  const [searchTerm, setsearchTerm] = useState("");
+
+  const handleChange = (e) => {
+    setsearchTerm(e.target.value);
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch("/api/fetchUsers", { cache: "no-store" });
+        const res = await fetch(`/api/fetchUsers?search=${searchTerm}`, { cache: "no-store" });
         const data = await res.json();
 
         if (!data.error) {
@@ -43,8 +48,17 @@ const IsAddPartner = () => {
 
   if (loadingF) return <LoadingF />;
   return (
-    <div className=" w-[370px] sm:w-fit overflow-x-scroll mx-auto pt-16">
-      <table className=" w-full ">
+    <div className="mt-16 max-w-2xl mx-auto">
+      <input
+        onChange={handleChange}
+        value={searchTerm}
+        type="text"
+        name="search"
+        placeholder="Shearch a user..."
+        className=" outline-none p-2 rounded-xl border bg-[#FFF1DA] w-full mb-5"
+      />
+      <div className=" overflow-x-scroll scrollbar">
+      {users.length>0? <table className=" w-full ">
         <thead className="bg-[#E9F7F5]">
           <tr>
             <th className="border  px-4 py-2 text-center">Username</th>
@@ -90,7 +104,8 @@ const IsAddPartner = () => {
             );
           })}
         </tbody>
-      </table>
+      </table>:<p className=" text-center">No users yet!</p>}
+      </div>
     </div>
   );
 };

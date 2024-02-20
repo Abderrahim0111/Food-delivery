@@ -6,6 +6,7 @@ import IsFoods from "@/components/isFoods";
 import IsOrders from "@/components/isOrders";
 import IsPartners from "@/components/isPartners";
 import IsProfile from "@/components/isPorfile";
+import LoadingF from "@/components/loadingF";
 import PartnerHeader from "@/components/partnerHeader";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -18,6 +19,7 @@ const Page = () => {
   const [isFoods, setisFoods] = useState(false);
   const [isAddFood, setisAddFood] = useState(false);
   const [userData, setuserData] = useState({});
+  const [loadingF, setloadingF] = useState(true);
 
   const router = useRouter();
 
@@ -29,8 +31,11 @@ const Page = () => {
 
         if (!data.error) {
           setuserData(data);
+          setloadingF(false)
         }
+        setloadingF(false)
       } catch (error) {
+        setloadingF(false)
         console.log(error.message);
       }
     };
@@ -48,16 +53,17 @@ const Page = () => {
     requireAuth();
   }, [userData]);
 
+  if(loadingF) return <LoadingF />
   return (
-    <div className="min-h-[calc(100vh-60px)] bg-[#FFC144] px-2">
+    <div className="px-2">
       {userData.role === "admin" && (
         <AdminHeader
-          {...{ setisAddPartner, setisProfile, setisPartners }}
+          {...{ setisAddPartner, setisProfile, setisPartners, isProfile, isPartners, isAddPartner }}
         />
       )}
       {userData.role === "partner" && (
         <PartnerHeader
-          {...{ setisFoods, setisOrders, setisProfile, setisAddFood }}
+          {...{ setisFoods, setisOrders, setisProfile, setisAddFood, isAddFood, isFoods, isOrders, isProfile }}
         />
       )}
       {isProfile && <IsProfile {...{ userData }} />}

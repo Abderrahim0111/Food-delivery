@@ -4,7 +4,7 @@ import React from "react";
 const OrderSections = async ({ props }) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_ENDPOINT}/api/fetchUserCategories/${props.params.storeName}`,
-    { cache: "no-store" }
+    { next: {revalidate: 300} }
   );
   const storeCategories = await res.json();
   return (
