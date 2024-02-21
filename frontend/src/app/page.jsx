@@ -70,7 +70,7 @@ export default async function Home(props) {
         </div>
       </div>
 
-      <div className=" max-w-[350px] sm:max-w-4xl mt-12 px-2 mx-auto flex flex-col items-center">
+      <div className=" max-w-[350px] sm:max-w-4xl mt-12 md:mb-[-90px] px-2 mx-auto flex flex-col items-center">
         <h1 className=" text-center font-bold text-4xl mb-10">
           Anything delivered
         </h1>
