@@ -16,7 +16,6 @@ const Page = () => {
           cache: "no-store",
         });
         const data = await res.json();
-        console.log(data)
         if (!data.error) {
           setorders(data);
           setloadingF(false)

@@ -1,26 +1,59 @@
 const jwt = require('jsonwebtoken');
 const Order = require('../models/orderSchema');
+const nodemailer = require("nodemailer")
 
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.net",
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.MAIL,
+      pass: process.env.APP_PASS,
+    },
+  });
 
+const sendMail = async (transporter, mailOptions) => {
+    try {
+        await  transporter.sendMail(mailOptions)
+    } catch (error) {
+        console.log(error.message)
+    }
+}
 
 const createOrder = async (req, res) => {
     try {
-        if(!req.body) return res.json({error: "Invalid informations"})
-        const ddd = req.body.forEach(async item => {
+        if (!req.body) return res.json({ error: "Invalid information" });
+
+        for (const item of req.body) {
             const order = await Order.create({
                 client: item.client,
                 ownerId: item.ownerId,
                 orders: item.orders,
                 city: item.city,
                 address: item.address,
-            })
-        });
+            });
 
-        res.json({message: "Order created successfully"})
+            const orderDetails = await Order.findById(order._id).populate("ownerId", "-password").populate("client", "-password");
+            const mailOptions = {
+                from: {
+                    name: "TastyRush",
+                    address: process.env.MAIL
+                },
+                to: orderDetails.ownerId.email,
+                subject: "New order in TastyRush.",
+                text: `Congrats! You have a new order from ${orderDetails.client.username}`,
+                html: `<b>Congrats! You have a new order from ${orderDetails.client.username}</b>`
+            };
+            await sendMail(transporter, mailOptions);
+        }
+
+        res.json({ message: "Order created successfully" });
     } catch (error) {
-        res.json({error: error.message})
+        res.json({ error: error.message });
     }
-}
+};
+
 
 const fetchClientOrders = async (req, res) => {
     try {
@@ -32,10 +65,9 @@ const fetchClientOrders = async (req, res) => {
         orders.map((order) => {
             const foods = []
             order.orders.map((food) => {
-                // Check if foodId exists and is not null
                 if (food.foodId) {
                     foods.push({
-                        image: food.foodId.images[0], // Ensure foodId exists before accessing images
+                        image: food.foodId.images[0],
                         title: food.foodId.title,
                         quantity: food.quantity,
                         price: food.price
@@ -69,10 +101,9 @@ const fetchPartnerOrders = async (req, res) => {
         orders.map((order) => {
             const foods = [];
             order.orders.map((food) => {
-                // Check if foodId exists and is not null
                 if (food.foodId) {
                     foods.push({
-                        image: food.foodId.images[0], // Ensure foodId exists before accessing images
+                        image: food.foodId.images[0],
                         title: food.foodId.title,
                         quantity: food.quantity,
                         price: food.price

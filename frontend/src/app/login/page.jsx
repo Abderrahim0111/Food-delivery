@@ -58,13 +58,13 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="h-[calc(100vh-64px)] bg-[#FFC144] px-2">
+    <div className=" bg-[#FFC144]">
       <h1 className=" font-bold text-3xl sm:text-5xl text-center py-10">
         Login with your account
       </h1>
       <form
         onSubmit={handleSubmit}
-        className=" flex flex-col gap-3 max-w-lg mx-auto"
+        className=" flex flex-col gap-3 max-w-lg mx-auto mb-10 px-2"
       >
         <input
           onChange={handleChnage}
@@ -91,6 +91,7 @@ const Page = () => {
         </div>
         {error && <p className=" text-red-500">{error}</p>}
       </form>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#fff" fillOpacity="1" d="M0,32L80,58.7C160,85,320,139,480,160C640,181,800,171,960,149.3C1120,128,1280,96,1360,80L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
     </div>
   );
 };

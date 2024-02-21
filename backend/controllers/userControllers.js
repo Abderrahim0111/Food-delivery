@@ -1,12 +1,33 @@
 const User = require("../models/userSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
 const cloudinary = require("cloudinary").v2;
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
   api_secret: process.env.API_SECRET,
 });
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  host: "smtp.gmail.net",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.MAIL,
+    pass: process.env.APP_PASS,
+  },
+});
+
+const sendMail = async (transporter, mailOptions) => {
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log("email sent")
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 const fetchUser = async (req, res) => {
   try {
@@ -62,7 +83,7 @@ const fetchPartners = async (req, res) => {
     const noPass = partners.map((partner) => {
       const { password, ...rest } = partner._doc;
       return rest;
-    }); 
+    });
 
     res.json(noPass);
   } catch (error) {
@@ -72,12 +93,12 @@ const fetchPartners = async (req, res) => {
 
 const fetchUsers = async (req, res) => {
   try {
-    const searchTerm = req.query.search || ""
+    const searchTerm = req.query.search || "";
     const users = await User.find({
       $or: [
-        {username: {$regex: searchTerm, $options: "i"}},
-        {email: {$regex: searchTerm, $options: "i"}}
-      ]
+        { username: { $regex: searchTerm, $options: "i" } },
+        { email: { $regex: searchTerm, $options: "i" } },
+      ],
     }).sort({ createdAt: -1 });
     const filtredUsers = users.filter((user) => {
       return user.role !== "admin";
@@ -97,6 +118,19 @@ const addPartner = async (req, res) => {
     const user = await User.findByIdAndUpdate(req.params.userId, req.body, {
       new: true,
     });
+    if (user.role === "partner") {
+      const mailOptions = {
+        from: {
+          name: "TastyRush",
+          address: process.env.MAIL,
+        },
+        to: user.email,
+        subject: "You become a partner",
+        text: `Congrats ${user.username}! You are now a partner.`,
+        html: `<b>Congrats ${user.username}! You are now a partner.</b>`,
+      };
+      await sendMail(transporter, mailOptions);
+    }
     res.json({ message: "Role updated successfully!" });
   } catch (error) {
     res.json({ error: error.message });
@@ -108,6 +142,8 @@ const setStoreInfo = async (req, res) => {
     const { storeCity, storeName, storeImage } = req.body;
     if (!storeCity || !storeName || !storeImage)
       return res.json({ error: "All fields are required" });
+    const isStoreName = await User.findOne({ storeName: storeName });
+    if (isStoreName) return res.json({ error: "Store name already exists!" });
     const decoded = jwt.verify(req.cookies.jwt, process.env.JWT);
     const user = await User.findByIdAndUpdate(
       decoded.id,

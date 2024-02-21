@@ -9,7 +9,7 @@ const AvailableStores = async ({ props }) => {
   );
   const stores = await res.json();
   return (
-    <div className=" my-16 px-2 max-w-4xl mx-auto">
+    <div className=" mb-16 px-2 max-w-4xl mx-auto">
       <h1 className=" text-4xl text-center font-bold mb-8">
         Stores in {props.searchParams.city} you might like
       </h1>

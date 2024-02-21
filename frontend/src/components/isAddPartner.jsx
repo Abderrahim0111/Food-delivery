@@ -48,7 +48,7 @@ const IsAddPartner = () => {
 
   if (loadingF) return <LoadingF />;
   return (
-    <div className="mt-16 max-w-2xl mx-auto">
+    <div className="mt-16 max-w-max mx-auto">
       <input
         onChange={handleChange}
         value={searchTerm}
