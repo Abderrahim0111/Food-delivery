@@ -55,8 +55,8 @@ export default async function Home(props) {
         </Suspense>
       )}
 
-      <div className="mt-16 px-2 py-10 ">
-        <h1 className=" font-bold text-4xl text-center mb-9">
+      <div className="mt-20 px-2 ">
+        <h1 className=" font-bold text-4xl text-center mb-8">
           Cities where we deliver
         </h1>
         <div className=" flex flex-wrap items-center justify-center gap-5">
@@ -70,12 +70,13 @@ export default async function Home(props) {
         </div>
       </div>
 
-      <div className=" max-w-[350px] sm:max-w-4xl mt-12 md:mb-[-90px] px-2 mx-auto flex flex-col items-center">
+      <div className=" max-w-[350px] sm:max-w-4xl mt-20 md:mb-[-90px] px-2 mx-auto flex flex-col items-center">
         <h1 className=" text-center font-bold text-4xl mb-10">
           Anything delivered
         </h1>
         <div className=" flex flex-col sm:flex-row gap-10 items-center justify-center">
           <div className="flex flex-col items-center gap-4">
+          <Image src="https://glovoapp.com/images/why-glovo/restaurants-opt.svg" alt="" height={200} width={200} />
             <h3 className=" font-bold text-xl text-center">
               Your city's top restaurants
             </h3>
@@ -86,6 +87,7 @@ export default async function Home(props) {
           </div>
 
           <div className="flex flex-col items-center gap-4">
+          <Image alt="" src="https://glovoapp.com/images/why-glovo/delivery-opt.svg" height={200} width={200}/>
             <h3 className=" font-bold text-xl text-center">Fast delivery</h3>
             <p className=" text-center">
               Like a flash! Order or send anything in your city and receive it
@@ -94,6 +96,7 @@ export default async function Home(props) {
           </div>
 
           <div className="flex flex-col items-center gap-4">
+            <Image src="https://glovoapp.com/images/why-glovo/groceries-opt.svg" alt="" height={200} width={200}/>
             <h3 className=" font-bold text-xl text-center">
               Groceries delivery & more
             </h3>

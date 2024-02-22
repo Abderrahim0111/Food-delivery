@@ -21,7 +21,7 @@ const SearchTerm = ({props}) => {
         value={searchTerm}
         className=" outline-none bg-transparent w-full"
         name="search"
-        placeholder={`Search in ${props.params.storeName}`}
+        placeholder={`Search in ${decodeURIComponent(props.params.storeName)}`}
       />
     </form>
   );

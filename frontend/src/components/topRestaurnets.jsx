@@ -9,8 +9,8 @@ const TopRestaurnets = async () => {
     const stores = await res.json()
 
     return (
-        <div className=" mb-16 px-2 max-w-4xl mx-auto">
-            <h1 className=" text-4xl text-center font-bold mb-8">Top restaurants and more in TastyRush</h1>
+        <div className="px-2 max-w-4xl mx-auto">
+            <h1 className=" text-4xl text-center font-bold mb-8 mt-5 sm:mt-0">Top restaurants and more in TastyRush</h1>
             <div className=" flex flex-wrap justify-center gap-8 ">
             {stores.map((store, index) => {
                 return(
