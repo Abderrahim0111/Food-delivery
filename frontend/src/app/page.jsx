@@ -57,6 +57,9 @@ export default async function Home(props) {
 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 135"><path fill="#FFC045" fillOpacity="1" d="M0,0L120,32C240,64,480,128,720,133.3C960,139,1200,85,1320,58.7L1440,32L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
       <div className=" bg-[#FFC045] py-10 md:pb-0">
+        <div className=" flex justify-center">
+        <Image src="https://glovoapp.com/images/landing/cities.svg" alt="image" height={200} width={200}/>
+        </div>
         <h1 className=" font-bold text-4xl text-center mb-8 px-2">
           Cities where we deliver
         </h1>
@@ -78,7 +81,7 @@ export default async function Home(props) {
         </h1>
         <div className=" flex flex-col sm:flex-row gap-10 items-center justify-center">
           <div className="flex flex-col items-center gap-4">
-          <Image src="https://glovoapp.com/images/why-glovo/restaurants-opt.svg" alt="" height={200} width={200} />
+          <Image src="https://glovoapp.com/images/why-glovo/restaurants-opt.svg" alt="image" height={200} width={200} />
             <h3 className=" font-bold text-xl text-center">
               Your city's top restaurants
             </h3>
@@ -89,7 +92,7 @@ export default async function Home(props) {
           </div>
 
           <div className="flex flex-col items-center gap-4">
-          <Image alt="" src="https://glovoapp.com/images/why-glovo/delivery-opt.svg" height={200} width={200}/>
+          <Image src="https://glovoapp.com/images/why-glovo/delivery-opt.svg" alt="image" height={200} width={200}/>
             <h3 className=" font-bold text-xl text-center">Fast delivery</h3>
             <p className=" text-center">
               Like a flash! Order or send anything in your city and receive it
@@ -98,7 +101,7 @@ export default async function Home(props) {
           </div>
 
           <div className="flex flex-col items-center gap-4">
-            <Image src="https://glovoapp.com/images/why-glovo/groceries-opt.svg" alt="" height={200} width={200}/>
+            <Image src="https://glovoapp.com/images/why-glovo/groceries-opt.svg" alt="image" height={200} width={200}/>
             <h3 className=" font-bold text-xl text-center">
               Groceries delivery & more
             </h3>
