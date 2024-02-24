@@ -55,11 +55,12 @@ export default async function Home(props) {
         </Suspense>
       )}
 
-      <div className="mt-20 px-2 ">
-        <h1 className=" font-bold text-4xl text-center mb-8">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 135"><path fill="#FFC045" fillOpacity="1" d="M0,0L120,32C240,64,480,128,720,133.3C960,139,1200,85,1320,58.7L1440,32L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
+      <div className=" bg-[#FFC045] py-10 md:pb-0">
+        <h1 className=" font-bold text-4xl text-center mb-8 px-2">
           Cities where we deliver
         </h1>
-        <div className=" flex flex-wrap items-center justify-center gap-5">
+        <div className=" flex flex-wrap items-center justify-center gap-5 px-2">
           {cities.map((city, index) => {
             return (
               <p key={index} className=" px-5 py-2 rounded-3xl bg-[#FFF2DA]">
@@ -69,8 +70,9 @@ export default async function Home(props) {
           })}
         </div>
       </div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 65 1440 225"><path fill="#FFC045" fillOpacity="1" d="M0,224L80,202.7C160,181,320,139,480,122.7C640,107,800,117,960,133.3C1120,149,1280,171,1360,181.3L1440,192L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path></svg>
 
-      <div className=" max-w-[350px] sm:max-w-4xl mt-20 md:mb-[-90px] px-2 mx-auto flex flex-col items-center">
+      <div className=" max-w-[350px] sm:max-w-4xl  md:mb-[-90px] md:mt-[-40px] px-2 mx-auto flex flex-col items-center">
         <h1 className=" text-center font-bold text-4xl mb-10">
           Anything delivered
         </h1>

@@ -48,7 +48,7 @@ const Page = () => {
 
   if(loadingF) return <LoadingF />
   return (
-    <div className=" mt-16 max-w-2xl mx-auto px-2">
+    <div className=" mt-16 max-w-max mx-auto px-2">
       {orders.length > 0 ? (
         <>
           <h1 className=" text-3xl mb-10 font-bold text-center">Your orders</h1>
