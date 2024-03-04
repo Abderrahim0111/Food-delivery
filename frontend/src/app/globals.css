@@ -5,3 +5,7 @@
 .scrollbar::-webkit-scrollbar{
     display: none;
 }
+
+.borderraduis{
+    border-radius: 46% 54% 39% 61% / 63% 59% 41% 37%  ;
+}

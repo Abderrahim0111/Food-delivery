@@ -5,7 +5,7 @@ import React from "react";
 const AvailableStores = async ({ props }) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_ENDPOINT}/api/fetchStoresByCity/${props.searchParams.city}`,
-    { next: {revalidate: 300} }
+    { next: { revalidate: 300 } }
   );
   const stores = await res.json();
   return (
@@ -22,13 +22,16 @@ const AvailableStores = async ({ props }) => {
                 key={index}
                 className=" cursor-pointer flex items-center flex-col relative hover:scale-105 transition-all duration-300"
               >
-                <Image
-                  src={store.storeImage}
-                  alt="burger"
-                  height={130}
-                  width={130}
-                />
-                <p className=" bg-[#FFC144] px-2 py-1 absolute bottom-[-10px]  rounded-xl">
+                <div className="borderraduis w-[128px] h-[121px] overflow-hidden">
+                  <Image
+                    src={store.storeImage}
+                    alt="burger"
+                    height={130}
+                    width={130}
+                    className=" h-full w-full object-cover"
+                  />
+                </div>
+                <p className=" bg-[#FFC144] px-2 py-1 absolute bottom-[-10px] font-bold rounded-xl">
                   {store.storeName}
                 </p>
               </Link>

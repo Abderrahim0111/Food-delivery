@@ -65,7 +65,8 @@ const IsPartners = () => {
           <table className=" w-full">
             <thead className="bg-[#E9F7F5]">
               <tr>
-                <th className="border  px-4 py-2 text-center">Username</th>
+                <th className="border  px-4 py-2 text-center">Store</th>
+                <th className="border  px-4 py-2 text-center">Partner</th>
                 <th className="border  px-4 py-2 text-center">Phone</th>
                 <th className="border  px-4 py-2 text-center">Email</th>
                 <th className="border  px-4 py-2 text-center">Role</th>
@@ -75,6 +76,9 @@ const IsPartners = () => {
               {partners.map((partner, index) => {
                 return (
                   <tr key={index}>
+                    <td className="border  px-4 py-2 text-center">
+                      {partner.storeName}
+                    </td>
                     <td className="border  px-4 py-2 text-center">
                       {partner.username}
                     </td>

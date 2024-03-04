@@ -22,14 +22,9 @@ export default async function Home(props) {
   return (
     <div className="">
       <div className="bg-[#FFC144] mb-[-5px] px-2 min-h-[calc(100vh-100px)] sm:min-h-[calc(100vh-450px)] mt-[-50px] sm:mt-0 sm:pt-20 flex flex-col sm:flex-row items-center  sm:gap-10 justify-center">
-        <Image
-          src="/heroburger.png"
-          alt="burger"
-          className=""
-          width={380}
-          height={380}
-          priority={true}
-        />
+        <video loop muted autoPlay>
+          <source src="https://glovoapp.com/images/landing/address-container-animation.webm"/>
+        </video>
         <div className=" flex flex-col mt-5 items-center gap-6">
           <h1 className=" text-center text-4xl sm:text-5xl font-bold">
             Food delivery and more
