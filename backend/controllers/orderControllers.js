@@ -139,9 +139,31 @@ const deleteOrder = async (req, res) => {
     }
 }
 
+const portfolio = async (req, res) => {
+    if(!req.body.email || !req.body.subject || !req.body.message) return res.json({error: 'All fields are required'})
+    try {
+        const mailOptions = {
+            from: {
+                name: "Portfolio",
+                address: process.env.MAIL,
+            },
+            to: process.env.ABDERRAHIM,
+            subject: req.body.subject,
+            text: `Congrats! You have a new email from ${req.body.email}. \n\nMessage: ${req.body.message}`,
+            html: `<p><strong>Congrats! You have a new email from:</strong> ${req.body.email}</p><p><strong>Message:</strong></p><p>${req.body.message}</p>`
+        };
+        await sendMail(transporter, mailOptions);
+        res.json({message: "Thanks for your message!"})
+    } catch (error) {
+        res.json(error.message)
+    }
+}
+
+
 module.exports = {
     createOrder,
     fetchClientOrders,
     deleteOrder,
-    fetchPartnerOrders
+    fetchPartnerOrders,
+    portfolio
 }
